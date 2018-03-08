@@ -1,13 +1,12 @@
 buildscript {
-    dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
-    }
-
     repositories {
         jcenter()
         maven {
             url = "http://files.minecraftforge.net/maven"
         }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
     }
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
@@ -38,10 +37,10 @@ repositories {
 }
 
 dependencies {
-    deobfCompile "cofh:RedstoneFlux:1.12-2.0.0.1:universal"
+    compile "cofh:RedstoneFlux:1.12-2.0.0.1:universal"
     compile 'com.github.Azanor:Baubles:-SNAPSHOT'
-    //botania should be in /libs
-    compile files("libs/Botania r1.10-354-deobf.jar")
+    compile files("libs/Botania r1.10-354-deobf.jar",
+            "libs/BetterWithMods-1.12-2.0.25-dev.jar")
 }
 
 processResources

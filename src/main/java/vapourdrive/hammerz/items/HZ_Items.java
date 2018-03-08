@@ -1,8 +1,13 @@
 package vapourdrive.hammerz.items;
 
+import betterwithmods.common.BWMBlocks;
+import betterwithmods.common.BWMItems;
+import betterwithmods.common.items.ItemMaterial;
+import betterwithmods.module.gameplay.AnvilRecipes;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
@@ -55,12 +60,6 @@ public class HZ_Items
 	public static void postInit()
 	{
 		registerHammerTypes();
-		String ores[] = OreDictionary.getOreNames();
-		Hammerz.log.log(Level.INFO, "Currently registered ores: ");
-
-		for(String ore : ores) {
-			Hammerz.log.log(Level.INFO, ore);
-		}
 	}
 
 	@SubscribeEvent
@@ -126,6 +125,7 @@ public class HZ_Items
 		{
 			Hammerz.log.log(Level.INFO, "Better With Mods Compat loading");
 			addHammerType(0, 0, "steel_block", "SoulforgedSteel", 3, 1561, 8.0F, 3.0F, 22, EnumRarity.COMMON);
+
 		}
 		if (Loader.isModLoaded("roots"))
 		{
@@ -145,6 +145,11 @@ public class HZ_Items
 			{
 				Hammerz.log.log(Level.INFO, "Hammer material " + type.getName() + " confirmed, adding to list");
 				hammerTypes.add(potentialHammerTypes.get(i));
+
+				if(type.getName().toLowerCase().equals("soulforgedsteel")) {
+					AnvilRecipes.addSteelShapedRecipe(new ResourceLocation("steel_hammer"), RandomUtils.getHammer(type.getName()),
+							"XXX", " H ", " H ", " H ", 'X', BWMBlocks.STEEL_BLOCK, 'H', ItemMaterial.getMaterial(ItemMaterial.EnumMaterial.HAFT));
+				}
 			}
 			else {
 				//Removes extra recipes. Again, I should probably move this to an IConditional
